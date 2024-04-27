@@ -1,2 +1,2 @@
 print("Olá")
-print("oi")
+print("oi e olá")
