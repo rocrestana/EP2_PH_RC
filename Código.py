@@ -1,4 +1,4 @@
-
+import time
 from random import *
 def cria_mapa(N):
     mapa = []
@@ -74,11 +74,11 @@ def foi_derrotado(m):
 
 import random
 def tiro_computador(mapa):
-    l = random.choice(0, len(mapa)-1)
-    c = random.choice(0, len(mapa)-1)
-    while mapa[l][c] != 'X' and mapa[l][c] != 'A':
-        l = random.choice(0, len(mapa)-1)
-        c = random.choice(0, len(mapa)-1)
+    l = random.randint(0, 9)
+    c = random.randint(0, 9)
+    while mapa[l][c] == 'X' and mapa[l][c] == 'A':
+        l = random.randint(0, 9)
+        c = random.randint(0, 9)
 
     if mapa[l][c] == '':
         mapa[l][c] = 'A'
@@ -221,8 +221,13 @@ for navios, blocos in PAISES[k].items():
 
     mapa = aloca_navios(mapa, blocos)
 
-mapa_cego = cria_mapa()
+mapa_cego = cria_mapa(10)
 print (mapa_cego)
+
+time.sleep(3)
+
+mapa = tiro_computador(mapa)
+print (mapa)
 
 while True:
     mapa = tiro_computador(mapa)
