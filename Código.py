@@ -80,7 +80,7 @@ def tiro_computador(mapa):
         l = random.randint(0, 9)
         c = random.randint(0, 9)
 
-    if mapa[l][c] == '':
+    if mapa[l][c] == ' ':
         mapa[l][c] = 'A'
 
     if mapa[l][c] == 'N':
@@ -153,6 +153,8 @@ print('Iniciando o Jogo!')
 print(f'Computador está alocando os navios de guerra do país {pais_computador}...')
 print('Computador já está em posição de batalha!')
 
+col = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7, 'I': 8, 'J': 9}
+
 def aloca_navios2 (mapa, blocos):
     import random
     n = len(mapa)
@@ -183,19 +185,19 @@ for blocos in PAISES[pais_computador].values():
 mapa_c = aloca_navios2(mapa_c, lista_blocos)
 
 
-soma = 1
+s = 1
 for k,v in PAISES.items():
-    print(f'{soma}: {k}')
-    for k2,v2 in v.items():
-        print(f'    {v2} {k2}')
-    soma += 1
+    print(f'{s}: {k}')
+    for navio,blocos in v.items():
+        print(f'    {blocos} {navio}')
+    s += 1
 
 while True:
-    input_jogador = int(input('Qual o número da nação da sua frota? '))
-    if input_jogador not in [1,2,3,4,5]:
+    frota_jogador = int(input('Qual o número da nação da sua frota? '))
+    if frota_jogador not in [1,2,3,4,5]:
         print('Opção inválida')
     else:
-        pais_jogador = input_jogador
+        pais_jogador = frota_jogador
         break
 i = 0
 for k , v in PAISES.items():
@@ -208,14 +210,18 @@ for k , v in PAISES.items():
 for navios, blocos in PAISES[k].items():
     print(mapa)
     print(f'Alocar: {navios} ({blocos} bloco(s))')
-    coluna = int(input ('Informe a letra: '))
+    c0 = input ('Informe a letra: ')
+    c = c0.upper()
+    coluna = col[c]
     linha = int(input('Informe a linha: '))
     orientacao = input('Informe a Orientação: ')
 
     while posicao_suporta(mapa, blocos, linha, coluna, orientacao) == False:
         print('Posição inválida') 
         print(f'Alocar: {navios} ({blocos} bloco(s))')
-        coluna = int(input ('Informe a letra: '))
+        c0 = input ('Informe a letra: ')
+        c = c0.upper()
+        coluna = col[c]
         linha = int(input('Informe a linha: '))
         orientacao = input('Informe a Orientação: ') 
 
@@ -226,19 +232,21 @@ print (mapa_cego)
 
 time.sleep(3)
 
-mapa = tiro_computador(mapa)
-print (mapa)
 
 while True:
     mapa = tiro_computador(mapa)
     print (mapa)
 
-    colunat = input('Qual é a coluna do seu tiro?')
+    c0 = input('Qual é a coluna do seu tiro?')
+    c = c0.upper()
+    colunat = col[c]
     linhat = int(input('Qual é a linha do seu tiro?'))
 
     while mapa_c[linhat][colunat] == 'X'  or mapa_c[linhat][colunat] == 'A':
         print ('Você já atirou aí, escolha outra posição')
-        colunat = input('Qual é a coluna do seu tiro?')
+        c0 = input('Qual é a coluna do seu tiro?')
+        c = c0.upper()
+        colunat = col[c]
         linhat = int(input('Qual é a linha do seu tiro?'))
 
 
@@ -247,7 +255,7 @@ while True:
         mapa_cego[linhat][colunat] = 'X'
         print('Acertou!')
 
-    if mapa_c[linhat][colunat] == '':
+    if mapa_c[linhat][colunat] == ' ':
         mapa_c[linhat][colunat] = 'A'
         mapa_cego[linhat][colunat] = 'A'
         print('Água!')
