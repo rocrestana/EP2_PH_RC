@@ -223,3 +223,39 @@ for navios, blocos in PAISES[k].items():
 
 mapa_cego = cria_mapa()
 print (mapa_cego)
+
+while True:
+    mapa = tiro_computador(mapa)
+    print (mapa)
+
+    colunat = input('Qual é a coluna do seu tiro?')
+    linhat = int(input('Qual é a linha do seu tiro?'))
+
+    while mapa_c[linhat][colunat] == 'X'  or mapa_c[linhat][colunat] == 'A':
+        print ('Você já atirou aí, escolha outra posição')
+        colunat = input('Qual é a coluna do seu tiro?')
+        linhat = int(input('Qual é a linha do seu tiro?'))
+
+
+    if mapa_c[linhat][colunat] == 'N':
+        mapa_c[linhat][colunat] = 'X'
+        mapa_cego[linhat][colunat] = 'X'
+        print('Acertou!')
+
+    if mapa_c[linhat][colunat] == '':
+        mapa_c[linhat][colunat] = 'A'
+        mapa_cego[linhat][colunat] = 'A'
+        print('Água!')
+
+    print (mapa_cego)
+
+    if foi_derrotado(mapa) == True:
+        print ('Você ganhou!')
+        break
+    if foi_derrotado(mapa_c) == True:
+        print ('Você perdeu...')
+        break
+
+
+
+    
