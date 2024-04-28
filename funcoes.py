@@ -9,6 +9,26 @@ def cria_mapa(N):
     return mapa
 
 #falta a segunda função
+def posicao_suporta(mapa, b, l, c, o):
+    if l > len(mapa)-1 or c > len(mapa)-1:
+        return False
+    if o == 'h':
+        if c + b > len(mapa):
+            return False
+        for i in range (c, c + b):
+            if mapa[l][i] == 'N':
+                return False
+
+    if o == 'v':
+        if l + b > len(mapa):
+            return False
+        for i in range (l, l+b):
+            if mapa[i][c] == 'N':
+                return False
+
+    return True
+
+
 
 
 
