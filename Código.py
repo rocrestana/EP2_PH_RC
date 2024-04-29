@@ -108,8 +108,20 @@ def f(mapa):
     print ('  A B C D E F G H I J ')
     return ''
 
+
+
 while True:
     mapa = cria_mapa(10)
+
+    CONFIGURACAO = {
+    'destroyer': 3,
+    'porta-avioes': 5,
+    'submarino': 2,
+    'torpedeiro': 3,
+    'cruzador': 2,
+    'couracado': 4
+}
+
     PAISES =  {
         'Brasil': {
             'cruzador': 1,
@@ -179,8 +191,9 @@ while True:
 
     mapa_c = cria_mapa(10)
     lista_blocos = []
-    for blocos in PAISES[pais_computador].values():
-        lista_blocos.append(blocos)
+    for navio, qntd in PAISES[pais_computador].items():
+        for i in range (qntd):
+            lista_blocos.append(CONFIGURACAO[navio])
     mapa_c = aloca_navios2(mapa_c, lista_blocos)
 
 
@@ -206,25 +219,26 @@ while True:
             print("Agora é sua vez de alocar seus navios de guerra!")
             break
 
-    for navios, blocos in PAISES[k].items():
-        f(mapa)
-        print(f'Alocar: {navios} ({blocos} bloco(s))')
-        c0 = input ('Informe a letra: ')
-        c = c0.upper()
-        coluna = col[c]
-        linha = int(input('Informe a linha: '))
-        orientacao = input('Informe a Orientação (v/h): ')
-
-        while posicao_suporta(mapa, blocos, linha, coluna, orientacao) == False:
-            print('Posição inválida') 
-            print(f'Alocar: {navios} ({blocos} bloco(s))')
+    for navios, qtd in PAISES[k].items():
+        for i in range (qtd):
+            f(mapa)
+            print(f'Alocar: {navios} ({CONFIGURACAO[navios]} bloco(s))')
             c0 = input ('Informe a letra: ')
             c = c0.upper()
             coluna = col[c]
             linha = int(input('Informe a linha: '))
-            orientacao = input('Informe a Orientação (v/h): ') 
+            orientacao = input('Informe a Orientação (v/h): ')
 
-        mapa = aloca_navios(mapa, blocos)
+            while posicao_suporta(mapa, CONFIGURACAO[navios], linha, coluna, orientacao) == False:
+                print('Posição inválida') 
+                print(f'Alocar: {navios} ({CONFIGURACAO[navios]} bloco(s))')
+                c0 = input ('Informe a letra: ')
+                c = c0.upper()
+                coluna = col[c]
+                linha = int(input('Informe a linha: '))
+                orientacao = input('Informe a Orientação (v/h): ') 
+
+            mapa = aloca_navios(mapa, CONFIGURACAO[navios])
 
     time.sleep(2)
 
@@ -259,7 +273,7 @@ while True:
             colunat = col[c]
             linhat = int(input('Qual é a linha do seu tiro?(número)'))
 
-        time.sleep(2)
+        time.sleep(1)
         if mapa_c[linhat][colunat] == 'N':
             mapa_c[linhat][colunat] = 'X'
             mapa_cego[linhat][colunat] = 'X'
