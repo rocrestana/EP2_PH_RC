@@ -181,9 +181,20 @@ while True:
     print("| Bem-vindo ao INSPER - Batalha Naval |")
     print("|                                     |")
     print(" =======   xxxxxxxxxxxxxxxxx   ======= \n")
+    time.sleep(1)
     print('Iniciando o Jogo!')
+    print(3)
+    time.sleep(1)
+    print(2)
+    time.sleep(1)
+    print(1)
+    time.sleep(1)
     print(f'Computador está alocando os navios de guerra do país {pais_computador}...')
+    time.sleep(2.5)
     print('Computador já está em posição de batalha!')
+    time.sleep(1)
+    print('Sua vez!')
+    time.sleep(1)
 
     col = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7, 'I': 8, 'J': 9}
 
