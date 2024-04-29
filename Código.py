@@ -1,13 +1,10 @@
 import time
 from random import *
-def cria_mapa(N):
-    mapa = []
-    for i in range(N):
-        mapa.append([])
-    for linha in mapa:
-        for i in range (N):
-            linha.append(' ')
-    return mapa
+
+def cria_mapa (N):
+    l=[' ']*N
+    mapa=[l]*N
+    return (mapa)
 
 def posicao_suporta(mapa, b, l, c, o):
     if l > len(mapa)-1 or c > len(mapa)-1:
@@ -155,28 +152,7 @@ print('Computador já está em posição de batalha!')
 
 col = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7, 'I': 8, 'J': 9}
 
-def aloca_navios2 (mapa, blocos):
-    import random
-    n = len(mapa)
-    for b in blocos:
-        linha = random.randint(0, n-1)
-        coluna = random.randint(0, n-1)
-        orientacao = random.choice(['h', 'v'])
-        
-        while posicao_suporta(mapa, b, linha, coluna, orientacao) == False:
-            linha = random.randint(0, n-1)
-            coluna = random.randint(0, n-1)
-            orientacao = random.choice(['h', 'v'])
 
-        if orientacao == 'h':
-            for i in range (coluna, coluna + b):
-                mapa[linha][i] = 'N'
-
-        if orientacao == 'v':
-            for i in range (linha, linha + b):
-                mapa[i][coluna] = 'N'
-
-    return mapa
 
 mapa_c = cria_mapa(10)
 lista_blocos = []
@@ -228,7 +204,7 @@ for navios, blocos in PAISES[k].items():
     mapa = aloca_navios(mapa, blocos)
 
 mapa_cego = cria_mapa(10)
-print ("O mapa do seu oponente encontra-se abaixo. ")
+print ("O mapa do território do oponente encontra-se abaixo. ")
 print (mapa_cego)
 
 time.sleep(3)
@@ -264,10 +240,10 @@ while True:
 
     print (mapa_cego)
 
-    if foi_derrotado(mapa) == True:
+    if foi_derrotado(mapa_c) == True:
         print ('Você ganhou!')
         break
-    if foi_derrotado(mapa_c) == True:
+    if foi_derrotado(mapa) == True:
         print ('Você perdeu...')
         break
 
