@@ -77,7 +77,7 @@ import random
 def tiro_computador(mapa):
     l = random.randint(0, 9)
     c = random.randint(0, 9)
-    while mapa[l][c] == 'X' and mapa[l][c] == 'A':
+    while mapa[l][c] == 'X' or mapa[l][c] == 'A':
         l = random.randint(0, 9)
         c = random.randint(0, 9)
 
@@ -88,6 +88,24 @@ def tiro_computador(mapa):
         mapa[l][c] = 'X'
 
     return mapa
+
+def f(mapa):
+    lista = mapa[:]
+    # for l, linha in enumerate (lista):
+    #     for c, letra in enumerate (linha):
+    #         if letra == 'N':
+    #             lista[l][c] = (u"\u001b[42mN\u001b[0m")
+    #         if letra == 'X':
+    #             lista[l][c] = (u"\u001b[41mX\u001b[0m")
+    #         if letra == 'A':
+    #             lista[l][c] = (u"\u001b[44mA\u001b[0m")
+    #         if letra == ' ':
+    #             lista[l][c] = (u"\u001b[30m \u001b[0m") 
+    print ('  A B C D E F G H I J ')
+    for i in range (0, 10):
+        print (i, lista[i][0], lista[i][1], lista[i][2], lista[i][3], lista[i][4], lista[i][5], lista[i][6], lista[i][7], lista[i][8], lista[i][9], i)
+    print ('  A B C D E F G H I J ')
+    return ''
 
 mapa = cria_mapa(10)
 
@@ -188,7 +206,7 @@ for k , v in PAISES.items():
         break
 
 for navios, blocos in PAISES[k].items():
-    print(mapa)
+    f(mapa)
     print(f'Alocar: {navios} ({blocos} bloco(s))')
     c0 = input ('Informe a letra: ')
     c = c0.upper()
@@ -207,9 +225,12 @@ for navios, blocos in PAISES[k].items():
 
     mapa = aloca_navios(mapa, blocos)
 
+print ('Seu mapa ficou assim:')
+f(mapa)
+
 mapa_cego = cria_mapa(10)
 print ("O mapa do território do oponente encontra-se abaixo. ")
-print (mapa_cego)
+f(mapa_cego)
 
 time.sleep(3)
 
@@ -217,7 +238,7 @@ time.sleep(3)
 while True:
     mapa = tiro_computador(mapa)
     print("Seu oponente jogou! Confira os danos no seu mapa e planeje o proximo ataque!")
-    print (mapa)
+    f(mapa)
 
     c0 = input('Qual é a coluna do seu tiro?(letra)')
     c = c0.upper()
@@ -242,11 +263,12 @@ while True:
         mapa_cego[linhat][colunat] = 'A'
         print('Água!')
 
-    print (mapa_cego)
+    f(mapa_cego)
 
     if foi_derrotado(mapa_c) == True:
         print ('Você ganhou!')
         break
+
     if foi_derrotado(mapa) == True:
         print ('Você perdeu...')
         break
