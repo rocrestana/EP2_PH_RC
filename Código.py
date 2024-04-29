@@ -214,7 +214,7 @@ for navios, blocos in PAISES[k].items():
     c = c0.upper()
     coluna = col[c]
     linha = int(input('Informe a linha: '))
-    orientacao = input('Informe a Orientação: ')
+    orientacao = input('Informe a Orientação (v/h): ')
 
     while posicao_suporta(mapa, blocos, linha, coluna, orientacao) == False:
         print('Posição inválida') 
@@ -223,11 +223,12 @@ for navios, blocos in PAISES[k].items():
         c = c0.upper()
         coluna = col[c]
         linha = int(input('Informe a linha: '))
-        orientacao = input('Informe a Orientação: ') 
+        orientacao = input('Informe a Orientação (v/h): ') 
 
     mapa = aloca_navios(mapa, blocos)
 
 mapa_cego = cria_mapa(10)
+print ("O mapa do seu oponente encontra-se abaixo. ")
 print (mapa_cego)
 
 time.sleep(3)
@@ -235,19 +236,20 @@ time.sleep(3)
 
 while True:
     mapa = tiro_computador(mapa)
+    print("Seu oponente jogou! Confira os danos no seu mapa e planeje o proximo ataque!")
     print (mapa)
 
-    c0 = input('Qual é a coluna do seu tiro?')
+    c0 = input('Qual é a coluna do seu tiro?(letra)')
     c = c0.upper()
     colunat = col[c]
-    linhat = int(input('Qual é a linha do seu tiro?'))
+    linhat = int(input('Qual é a linha do seu tiro?(número)'))
 
     while mapa_c[linhat][colunat] == 'X'  or mapa_c[linhat][colunat] == 'A':
         print ('Você já atirou aí, escolha outra posição')
-        c0 = input('Qual é a coluna do seu tiro?')
+        c0 = input('Qual é a coluna do seu tiro?(letra)')
         c = c0.upper()
         colunat = col[c]
-        linhat = int(input('Qual é a linha do seu tiro?'))
+        linhat = int(input('Qual é a linha do seu tiro?(número)'))
 
 
     if mapa_c[linhat][colunat] == 'N':
@@ -267,6 +269,8 @@ while True:
         break
     if foi_derrotado(mapa_c) == True:
         print ('Você perdeu...')
+        break
+
         break
 
 
