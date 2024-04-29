@@ -1,10 +1,14 @@
 import time
 from random import *
 
-def cria_mapa (N):
-    l=[' ']*N
-    mapa=[l]*N
-    return (mapa)
+def cria_mapa(N):
+    mapa = []
+    for i in range(N):
+        mapa.append([])
+    for linha in mapa:
+        for i in range (N):
+            linha.append(' ')
+    return mapa
 
 def posicao_suporta(mapa, b, l, c, o):
     if l > len(mapa)-1 or c > len(mapa)-1:

@@ -8,3 +8,9 @@ def cria_mapa(N):
             linha.append(' ')
     return mapa
 
+print (' A B C D E F G H I ')
+for i in range (0, 10):
+    print (i, ' '* 17, i)
+print (' A B C D E F G H I ')
+
+
