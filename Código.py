@@ -162,6 +162,7 @@ while True:
 
     # alfabeto para montar o nome das colunas
     ALFABETO = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    ALFAJ = 'ABCDEFGHIJ'
 
     # cores para o terminal
     CORES = {
@@ -218,7 +219,7 @@ while True:
     while True:
         frota_jogador = int(input('Qual o número da nação da sua frota? '))
         if frota_jogador not in [1,2,3,4,5]:
-            print('Opção inválida')
+            print('Opção inválida. Informe um número de 1 a 5.')
         else:
             pais_jogador = frota_jogador
             break
@@ -234,14 +235,19 @@ while True:
         for i in range (qtd):
             f(mapa)
             print(f'Alocar: {navios} ({CONFIGURACAO[navios]} bloco(s))')
-            c0 = input ('Informe a letra: ')
-            c = c0.upper()
+            c0=input("Informe a letra: ")
+            c=c0.upper()
+            while c not in ALFAJ:
+                print ('Letra inválida. Escolha uma letra que remeta a uma posição no território.')
+                c0 = input ('Informe a letra: ')
+                c = c0.upper()
             coluna = col[c]
             linha = int(input('Informe a linha: '))
             orientacao = input('Informe a Orientação (v/h): ')
-
-            while posicao_suporta(mapa, CONFIGURACAO[navios], linha, coluna, orientacao) == False:
-                print('Posição inválida') 
+            
+            orientacoes=['v','h','V','H']
+            while posicao_suporta(mapa, CONFIGURACAO[navios], linha, coluna, orientacao) == False or orientacao not in orientacoes:
+                print('Posicionamento inválido. Informe uma posição e orientação válida para o navio informado.') 
                 print(f'Alocar: {navios} ({CONFIGURACAO[navios]} bloco(s))')
                 c0 = input ('Informe a letra: ')
                 c = c0.upper()
@@ -274,8 +280,16 @@ while True:
 
         c0 = input('Qual é a coluna do seu tiro?(letra)')
         c = c0.upper()
+        while c not in ALFAJ:
+            print('Letra inválida.')
+            c0 = input('Qual é a coluna do seu tiro?(letra)')
+            c = c0.upper()
         colunat = col[c]
         linhat = int(input('Qual é a linha do seu tiro?(número)'))
+        while linhat not in range(0,10):                      
+            print ('Número inválido')
+            linhat = (input('Qual é a linha do seu tiro?(número)'))
+        
 
         while mapa_c[linhat][colunat] == 'X'  or mapa_c[linhat][colunat] == 'A':
             print ('Você já atirou aí, escolha outra posição')
