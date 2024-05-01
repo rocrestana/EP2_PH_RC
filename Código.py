@@ -109,6 +109,7 @@ def f(mapa):
     return ''
 
 
+num=['0','1','2','3','4','5','6','7','8','9']
 
 while True:
     mapa = cria_mapa(10)
@@ -242,8 +243,13 @@ while True:
                 c0 = input ('Informe a letra: ')
                 c = c0.upper()
             coluna = col[c]
-            linha = int(input('Informe a linha: '))
+            linha = (input('Informe a linha: ')) 
+            while linha not in num:
+                    print ('Linha inválida. Informe um número válido.')
+                    linha = (input("Informe a linha (número): "))
+            linha = int(linha)
             orientacao = input('Informe a Orientação (v/h): ')
+
             
             orientacoes=['v','h','V','H']
             while posicao_suporta(mapa, CONFIGURACAO[navios], linha, coluna, orientacao) == False or orientacao not in orientacoes:
@@ -285,10 +291,11 @@ while True:
             c0 = input('Qual é a coluna do seu tiro?(letra)')
             c = c0.upper()
         colunat = col[c]
-        linhat = int(input('Qual é a linha do seu tiro?(número)'))
-        while linhat not in range(0,10):                      
-            print ('Número inválido')
-            linhat = (input('Qual é a linha do seu tiro?(número)'))
+        linhat = (input('Qual é a linha do seu tiro?(número)'))
+        while linhat not in num:
+            print ("Linha inválida. Informe um número válido.")
+            linhat=(input("Informe a linha (número): "))
+        linhat = int(linhat)
         
 
         while mapa_c[linhat][colunat] == 'X'  or mapa_c[linhat][colunat] == 'A':
